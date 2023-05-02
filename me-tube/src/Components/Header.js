@@ -23,8 +23,8 @@ const Header = () => {
 
         <div className='basis-1/2 flex items-center justify-center'>
             <input className='w-3/5 h-9 border rounded-l-full ' type='text' />
-            <button className='h-9  bg-gray-400 rounded-r-full'><img className='h-full p-2' src='search.png' alt='something'></img></button>
-            <button className='h-9  bg-gray-400 rounded-full ml-6'><img className='h-full p-2' src='mic.png' alt='something'></img></button>
+            <button className='h-9 w-14 bg-gray-400 rounded-r-full flex items-center justify-center p-2'><img className='h-5 ' src='search.png' alt='something'></img></button>
+            <button className='h-9 w-9 bg-gray-400 rounded-full ml-7 flex items-center justify-center p-2'><img className='h-5' src='mic.png' alt='something'></img></button>
         </div>
 
         <div className='ml-auto'>
