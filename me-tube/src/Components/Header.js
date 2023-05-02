@@ -1,12 +1,23 @@
 import React from 'react'
-
+import { useSelector,useDispatch } from 'react-redux'
+import {toggleSidebar} from "../utils/appSlice"
 const Header = () => {
+
+  const sidebarStatus=useSelector((store)=>{
+    return store.app.sidebarStatus
+  })
+  const dispatch=useDispatch()
+  console.log(sidebarStatus)
+
+  function toggle(){
+    dispatch(toggleSidebar())
+  }
   return (
     <div className='flex p-4 items-center shadow-xl'>
 
 
         <div className='flex gap-3 items-center basis-1/4 '>
-            <img className='h-7'src='ham.png' alt='logo'/>
+            <img className='h-7'src='ham.png' alt='logo' onClick={toggle}/>
             <img src='yt_logo.png' alt='logo' className='h-10' />
         </div>
 
