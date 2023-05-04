@@ -8,7 +8,7 @@ const Sidebar = () => {
 if(!sidebarStatus)
   return null
   return (
-    <div className='p-2 shadow-lg mt-4 w-40 mr-5'>
+    <div className='p-2 shadow-lg mt-4 w-48 mr-5'>
         <div className='border-b-2'>
             <h1 className='text-2xl  font-bold text-red-600'>Explore</h1>
             <ul className='mt-4'>

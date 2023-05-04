@@ -1,11 +1,11 @@
 import React from 'react'
 import Sidebar from './Sidebar'
-import Main from './Main'
+import { Outlet } from 'react-router-dom'
 const Body = () => {
   return (
     <div className="mt-5 flex border border-cyan-100">
         <Sidebar/>
-        <Main/>
+        <Outlet/>
     </div>
   )
 }

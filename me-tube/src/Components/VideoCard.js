@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VideoCard = ({id,snippet,statistics}) => {
+const VideoCard = ({snippet,statistics}) => {
     
     const thumbnail=snippet.thumbnails.high.url
     const views=statistics.viewCount
@@ -12,7 +12,7 @@ const VideoCard = ({id,snippet,statistics}) => {
     }
     const channelTitle=snippet.channelTitle
     return (
-    <div className='w-64 h-80 p-3'>
+    <div className='w-72 h-80 p-3' >
         <img className="rounded-xl" src={thumbnail} alt="video title"/>
         <p className='font-bold text-l'>
             {
@@ -21,10 +21,10 @@ const VideoCard = ({id,snippet,statistics}) => {
                 :videoTitle
             }
         </p>
-        <p className='flex flex-col'>
+        <div className='flex flex-col'>
             <p>{channelTitle}</p>
             {views&&<p>{views} views</p>}
-        </p>
+        </div>
     </div>
   )
 }
