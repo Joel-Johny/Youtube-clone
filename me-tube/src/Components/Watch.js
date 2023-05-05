@@ -7,12 +7,12 @@ const Watch = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(closeSidebar())
-    },)
+    },[])
 
     const [params]=useSearchParams()
     const id=params.get("v")
     return (
-        <div className='p-2 m-2 flex'>
+        <div className='p-2 m-2 flex w-full'>
             <div className='p-2 m-2 flex'>
                 <iframe
                 width="1280" 

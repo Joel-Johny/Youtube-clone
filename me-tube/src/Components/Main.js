@@ -12,7 +12,7 @@ const Main = () => {
   useEffect(()=>{
     getVideos()
     dispatch(openSidebar())
-  },)
+  },[])
   async function getVideos(){
 
     const data=await fetch(ytApi)
@@ -32,10 +32,10 @@ const Main = () => {
 
       <div className='ml-4 mr-4 p-4 flex flex-wrap gap-4 items-center justify-center '>
         {
-          (videos.length>0) && videos.map((video,index)=>{
+          (videos.length>0) && videos.map((video)=>{
             return( 
-              <Link to={`/watch?v=`+video.id} key={index}>
-                <VideoCard {...video} key={index}/>
+              <Link to={`/watch?v=`+video.id} key={video.id}>
+                <VideoCard {...video} key={video.id}/>
               </Link>
              )
           })

@@ -5,15 +5,25 @@ const appSlice= createSlice({
     initialState:{
         sidebarStatus:true
     },
+    //its alsways good practice to return a new state like we return a new state in setter fn otherwise we'll get unexpected behaviour 
     reducers:{
         toggleSidebar : (state)=>{
-            state.sidebarStatus=!state.sidebarStatus
+            const newState={...state}
+            newState.sidebarStatus=!newState.sidebarStatus
+            return newState
         },
         openSidebar:(state)=>{
-            state.sidebarStatus=true
+            const newState={...state}
+            newState.sidebarStatus=true
+            return newState
+            
         },
         closeSidebar:(state)=>{
-            state.sidebarStatus=false
+            
+            const newState={...state}
+            newState.sidebarStatus=false
+            return newState
+
         }
     }
 })
