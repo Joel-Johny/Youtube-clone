@@ -15,10 +15,14 @@ const Header = () => {
     setSearchQuery(event.target.value);
   }
   useEffect(() => {
-    getSuggestions();
+    const timer=setTimeout(()=>getSuggestions(),200)
+    return()=>{
+      clearTimeout(timer)
+    }
   }, [searchQuery]);
 
   const getSuggestions = async () => {
+    console.log(searchQuery)
     const data = await fetch(ytSuggestions + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
