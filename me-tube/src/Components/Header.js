@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { toggleSidebar } from "../utils/appSlice";
+import { addToCache } from "../utils/searchSlice";
 import { Link } from "react-router-dom";
 import { ytSuggestions } from "../utils/data";
 const Header = () => {
   const dispatch = useDispatch();
+  const cache=useSelector((store)=>{
+    return store.searchCache
+  })
   const [searchQuery, setSearchQuery] = React.useState("");
   const [suggestions, setSuggestions] = React.useState([]);
   const [showSuggestions,setShowSuggestions]=React.useState(false);
@@ -15,7 +19,17 @@ const Header = () => {
     setSearchQuery(event.target.value);
   }
   useEffect(() => {
-    const timer=setTimeout(()=>getSuggestions(),200)
+    const timer=setTimeout(()=>{
+      if(cache[searchQuery])
+        setSuggestions(cache[searchQuery])
+      else
+        getSuggestions()
+      
+    },200)
+
+    if(cache[searchQuery])
+      setSuggestions(cache[searchQuery])
+   
     return()=>{
       clearTimeout(timer)
     }
@@ -26,6 +40,9 @@ const Header = () => {
     const data = await fetch(ytSuggestions + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
+    dispatch(addToCache({
+      [searchQuery]:json[1]
+    }))
   };
 
   return (
