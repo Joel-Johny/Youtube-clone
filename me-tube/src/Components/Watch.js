@@ -13,7 +13,7 @@ const Watch = () => {
     const id=params.get("v")
     return (
         <div className='p-2 m-2 flex w-full'>
-            <div className='p-2 m-2 flex'>
+            <div className='p-2 m-2 flex-col'>
                 <iframe
                 width="1280" 
                 height="720" 
@@ -24,6 +24,7 @@ const Watch = () => {
                 >
 
                 </iframe>
+                <div>Comments</div>
             </div>
             <div className='p-2 m-2 flex border border-red-100 w-full'>
                 Suggested videos

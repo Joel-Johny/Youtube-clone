@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../utils/appSlice";
 import { addToCache } from "../utils/searchSlice";
 import { Link } from "react-router-dom";
 import { ytSuggestions } from "../utils/data";
 const Header = () => {
   const dispatch = useDispatch();
-  const cache=useSelector((store)=>{
-    return store.searchCache
-  })
+  const cache = useSelector((store) => {
+    return store.searchCache;
+  });
   const [searchQuery, setSearchQuery] = React.useState("");
   const [suggestions, setSuggestions] = React.useState([]);
-  const [showSuggestions,setShowSuggestions]=React.useState(false);
+  const [showSuggestions, setShowSuggestions] = React.useState(false);
   function toggle() {
     dispatch(toggleSidebar());
   }
@@ -19,30 +19,26 @@ const Header = () => {
     setSearchQuery(event.target.value);
   }
   useEffect(() => {
-    const timer=setTimeout(()=>{
-      if(cache[searchQuery])
-        setSuggestions(cache[searchQuery])
-      else
-        getSuggestions()
-      
-    },200)
+    const timer = setTimeout(() => {
+      if (cache[searchQuery]) setSuggestions(cache[searchQuery]);
+      else getSuggestions();
+    }, 200);
 
-    if(cache[searchQuery])
-      setSuggestions(cache[searchQuery])
-   
-    return()=>{
-      clearTimeout(timer)
-    }
+    return () => {
+      clearTimeout(timer);
+    };
   }, [searchQuery]);
 
   const getSuggestions = async () => {
-    console.log(searchQuery)
+    console.log(searchQuery);
     const data = await fetch(ytSuggestions + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
-    dispatch(addToCache({
-      [searchQuery]:json[1]
-    }))
+    dispatch(
+      addToCache({
+        [searchQuery]: json[1],
+      })
+    );
   };
 
   return (
@@ -58,18 +54,29 @@ const Header = () => {
         <div className="basis-1/2 flex items-center justify-center">
           <div className="w-3/5 h-9">
             <input
-              className="w-full h-full border rounded-l-full px-3 "
+              className="w-full h-full border rounded-l-full px-3  "
               type="text"
               value={searchQuery}
               onChange={(event) => handleInput(event)}
-              onFocus={()=>setShowSuggestions(true)}
-              onBlur={()=>setShowSuggestions(false)}
+              onFocus={() => setShowSuggestions(true)}
+              onBlur={() => setShowSuggestions(false)}
             />
-            {(showSuggestions&&suggestions.length>0) && (
-              <div className="border rounded-lg bg-white mt-2 fixed w-[29.7%]">
+            <div className="w-full mt-2 relative">
+              {searchQuery.length > 0 && (
+                <img
+                  className="h-4 w-4 absolute right-[0.85rem] bottom-[1.1rem] cursor-pointer "
+                  src="/cross.png"
+                  alt="icon"
+                  onClick={()=>{setSearchQuery("")}}
+
+                />
+              )}
+            </div>
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="border rounded-lg bg-white py-1 absolute w-[29.7%]">
                 {suggestions.map((suggestion) => {
                   return (
-                    <div className="px-4 py-1  rounded-md hover:bg-slate-200">
+                    <div className="px-4 py-1  rounded-md hover:bg-slate-200  ">
                       {suggestion}
                     </div>
                   );
