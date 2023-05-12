@@ -47,7 +47,6 @@ const videoComments=[
 
 ]
 const PrintComment = ({author,text}) =>{
-
     return (
         <>
         <div className='flex items-center gap-2 bg-slate-100 p-1 '>
@@ -71,22 +70,29 @@ const PrintComment = ({author,text}) =>{
 
 
 const Comments=({videoComment})=>{
+    const [showreply,setShowReply]=React.useState(false)
+    
     return (
         <div className='mt-2'>
-            <PrintComment author={videoComment.author} text={videoComment.text}/>
-            {(videoComment.replies.length>0) && 
-            (
-                <div className='ml-5  border-l-2'>
-                    {videoComment.replies.map((reply)=>{
-                        return <Comments videoComment={reply}/>
+        <PrintComment author={videoComment.author} text={videoComment.text}/>
+        {(videoComment.replies.length > 0) && (
+            <>
+                <button onClick={()=>{setShowReply((old)=>!old)}}> Replies</button>
+                {showreply && (
+                    <div className='ml-5 border-l-2'>
+                    {videoComment.replies.map((reply) => {
+                        return <Comments videoComment={reply} />;
                     })}
-                </div>
-            )}
+                    </div>
+                )}
+            </>
+  )}
+</div>
 
-        </div >
     )
 }
 const CommentsContainer = () => {
+
   return (
     <div className='m-3 p-4 w-full border border-gray-100'>
         {
