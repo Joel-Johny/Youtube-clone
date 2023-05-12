@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { closeSidebar } from '../utils/appSlice'
 import { useSearchParams } from 'react-router-dom'
+import CommentsContainer from './CommentsContainer'
+
 const Watch = () => {
 
     const dispatch = useDispatch()
@@ -11,6 +13,8 @@ const Watch = () => {
 
     const [params]=useSearchParams()
     const id=params.get("v")
+  
+
     return (
         <div className='p-2 m-2 flex w-full'>
             <div className='p-2 m-2 flex-col'>
@@ -24,7 +28,9 @@ const Watch = () => {
                 >
 
                 </iframe>
-                <div>Comments</div>
+                <div>
+                    <CommentsContainer />
+                </div>
             </div>
             <div className='p-2 m-2 flex border border-red-100 w-full'>
                 Suggested videos
