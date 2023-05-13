@@ -77,7 +77,22 @@ const Comments=({videoComment})=>{
         <PrintComment author={videoComment.author} text={videoComment.text}/>
         {(videoComment.replies.length > 0) && (
             <>
-                <button onClick={()=>{setShowReply((old)=>!old)}}> Replies</button>
+                <button className='font-bold text-blue-950 ml-4' onClick={()=>{setShowReply((old)=>!old)}}>
+                    {(showreply)
+                        ?(
+                            <div className='flex items-center gap-1'>
+                            <img src='arrowU.png' alt="arrow" className='w-3 h-3' /> {videoComment.replies.length} Replies
+
+                            </div>
+                        )
+                        :(
+                            <div className='flex items-center gap-1'>
+                            <img src='arrowR.png' alt="arrow" className='w-3 h-3' /> {videoComment.replies.length} Replies
+
+                            </div>
+                        )
+                    }
+                </button>
                 {showreply && (
                     <div className='ml-5 border-l-2'>
                     {videoComment.replies.map((reply) => {
@@ -94,7 +109,7 @@ const Comments=({videoComment})=>{
 const CommentsContainer = () => {
 
   return (
-    <div className='m-3 p-4 w-full border border-gray-100'>
+    <div className='mt-3 p-4 w-full border border-gray-100'>
         {
                 videoComments.map((comment,index)=>{
                 return <Comments videoComment={comment} key={index}/>

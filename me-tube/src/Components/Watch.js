@@ -16,8 +16,8 @@ const Watch = () => {
   
 
     return (
-        <div className='p-2 m-2 flex w-full'>
-            <div className='p-2 m-2 flex-col'>
+        <div className='px-6 m-10 flex w-full'>
+            <div className=' flex-col'>
                 <iframe
                 width="1280" 
                 height="720" 
@@ -32,7 +32,7 @@ const Watch = () => {
                     <CommentsContainer />
                 </div>
             </div>
-            <div className='p-2 m-2 flex border border-red-100 w-full'>
+            <div className='mx-2 px-5 flex border border-red-100 w-full' >
                 Suggested videos
             </div>
         </div>
