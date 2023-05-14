@@ -19,7 +19,6 @@ const Main = () => {
     const json=await data.json()
     setVideos(json.items)
   }
-  console.log(videos[0])
   return (
     <div className='w-full p-4 shadow-lg mt-4 flex flex-col gap-6 justify-center'> 
 

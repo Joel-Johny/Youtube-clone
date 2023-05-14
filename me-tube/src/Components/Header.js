@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../utils/appSlice";
 import { addToCache } from "../utils/searchSlice";
 import { Link } from "react-router-dom";
 import { ytSuggestions } from "../utils/data";
 const Header = () => {
+  const searchButtonRef = useRef(null);
   const dispatch = useDispatch();
   const cache = useSelector((store) => {
     return store.searchCache;
@@ -30,7 +31,6 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSuggestions = async () => {
-    console.log(searchQuery);
     const data = await fetch(ytSuggestions + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
@@ -40,6 +40,7 @@ const Header = () => {
       })
     );
   };
+
 
   return (
     <div className="fixed top-0 w-full bg-white shadow-sm">
@@ -59,7 +60,6 @@ const Header = () => {
               value={searchQuery}
               onChange={(event) => handleInput(event)}
               onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setShowSuggestions(false)}
             />
             <div className="w-full mt-2 relative">
               {searchQuery.length > 0 && (
@@ -76,7 +76,16 @@ const Header = () => {
               <div className="border rounded-lg bg-white py-1 absolute w-[29.7%]">
                 {suggestions.map((suggestion) => {
                   return (
-                    <div className="px-4 py-1  rounded-md hover:bg-slate-200  ">
+                    <div
+                    key={suggestion}
+                     className="px-4 py-1  rounded-md hover:bg-slate-200  cursor-pointer" 
+                     onClick={async ()=>{
+                      await setSearchQuery(suggestion)
+                      searchButtonRef.current.click();
+                      setShowSuggestions(false)
+                     }}
+                     
+                    >
                       {suggestion}
                     </div>
                   );
@@ -84,9 +93,19 @@ const Header = () => {
               </div>
             )}
           </div>
-          <button className="h-9 w-14 bg-gray-400 rounded-r-full flex items-center justify-center p-2">
-            <img className="h-5 " src="search.png" alt="something"></img>
-          </button>
+          {
+            (searchQuery.length>0)
+            ?(
+              <Link ref={searchButtonRef} className="h-9 w-14 bg-gray-400 rounded-r-full flex items-center justify-center p-2" to={`/search?query=${searchQuery}`}>
+                <img className="h-5 " src="search.png" alt="something"></img>
+              </Link>
+            )
+            :(
+              <button className="h-9 w-14 bg-gray-400 rounded-r-full flex items-center justify-center p-2">
+                <img className="h-5 " src="search.png" alt="something"></img>
+              </button>
+            )
+          }
           <button className="h-9 w-9 bg-gray-400 rounded-full ml-7 flex items-center justify-center p-2">
             <img className="h-5" src="mic.png" alt="something"></img>
           </button>
