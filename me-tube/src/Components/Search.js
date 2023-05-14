@@ -15,7 +15,6 @@ const Search = () => {
   const SearchApi =async ()=>{
       const data= await fetch(ytSearch+query)
       const json=await data.json()
-      console.log(json)
 
       setSearchResults(json.items)
   }
@@ -27,7 +26,7 @@ const Search = () => {
               {
                   searchResults.map((video)=>{
                     return(
-                     <Link to={'/watch?v='+video.id.videoId}>
+                     <Link key={video.id.videoId} to={'/watch?v='+video.id.videoId}>
                         <VideoBanner {...video}/>
                     </Link>
                     )
