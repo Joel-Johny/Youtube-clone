@@ -14,7 +14,7 @@ const VideoCard = ({snippet,statistics}) => {
     return (
     <div className='w-72 h-80 p-3' >
         <img className="rounded-xl" src={thumbnail} alt="video title"/>
-        <p className='font-bold text-l'>
+        <p className='font-bold text-l mt-2'>
             {
                 (videoTitle.length>50)
                 ? videoTitleShort+"..."
