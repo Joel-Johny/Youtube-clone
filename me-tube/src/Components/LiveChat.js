@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ChatMessage from './ChatMessage' 
 import { useDispatch, useSelector } from 'react-redux'
-import { addMessage } from '../utils/chatSlice'
+import { addMessage,clearMessages } from '../utils/chatSlice'
 const LiveChat = () => {
 
     const dispatch=useDispatch()
@@ -26,7 +26,10 @@ const LiveChat = () => {
 
         },1000)
 
-        return ()=>clearInterval(interval)
+        return ()=>{
+            clearInterval(interval)
+            dispatch(clearMessages())
+        }
     },[])
   return (
     <>

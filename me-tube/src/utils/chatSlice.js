@@ -9,8 +9,15 @@ const chatSlice=createSlice({
         addMessage:(state,action)=>{
             const newState=JSON.parse(JSON.stringify(state))
             newState.messages.unshift(action.payload)
-            newState.messages.slice(25,1)
+            //after 25 messages it will delete from last 
+            newState.messages.splice(25,1)
 
+
+            return newState
+        },
+        clearMessages:(state)=>{
+            const newState=JSON.parse(JSON.stringify(state))
+            newState.messages=[]
             return newState
         }
     }
@@ -18,4 +25,4 @@ const chatSlice=createSlice({
 })
 
 export default chatSlice.reducer
-export const {addMessage}=chatSlice.actions
+export const {addMessage,clearMessages}=chatSlice.actions
