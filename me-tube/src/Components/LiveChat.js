@@ -8,17 +8,23 @@ const LiveChat = () => {
     const messages=useSelector((store)=>store.chat.messages)
     useEffect(()=>{
 
-        const interval=setInterval(()=>{
+        const interval=setInterval(async ()=>{
             // console.log("API POLLING")
+            const user=await fetch("https://randomuser.me/api/")
+            const userJson=await user.json()
 
+            const messageApi=await fetch("https://baconipsum.com/api/?type=all-meat&sentences=1")
+            const messageJson=await messageApi.json()
+            console.log(messageJson[0])
             dispatch(addMessage({
-                name:"Samantha",
-                message:"Joel"
+                profile:userJson.results[0].picture.medium,
+                name:userJson.results[0].name.first,
+                message:messageJson[0].slice(0,40)
             }))
 
 
 
-        },20000)
+        },1000)
 
         return ()=>clearInterval(interval)
     },[])
@@ -28,7 +34,7 @@ const LiveChat = () => {
         <div className='border border-green-600 mt-2 overflow-auto h-full flex flex-col-reverse '>
             
             {messages.map((message)=>{
-                return <ChatMessage name={message.name} message={message.message}/>
+                return <ChatMessage name={message.name} message={message.message} profile={message.profile}/>
             })}
 
         </div>

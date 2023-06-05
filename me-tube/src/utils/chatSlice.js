@@ -9,6 +9,8 @@ const chatSlice=createSlice({
         addMessage:(state,action)=>{
             const newState=JSON.parse(JSON.stringify(state))
             newState.messages.unshift(action.payload)
+            newState.messages.slice(25,1)
+
             return newState
         }
     }
