@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { closeSidebar } from '../utils/appSlice'
 import { useSearchParams } from 'react-router-dom'
 import CommentsContainer from './CommentsContainer'
-
+import LiveChat from "./LiveChat"
 const Watch = () => {
 
     const dispatch = useDispatch()
@@ -17,8 +17,9 @@ const Watch = () => {
 
     return (
         <div className='px-6 m-10 flex w-full'>
-            <div className=' flex-col'>
+            <div className=' flex-col '>
                 <iframe
+                className='rounded-lg'
                 width="1280" 
                 height="720" 
                 src={`https://www.youtube.com/embed/`+id }
@@ -32,8 +33,8 @@ const Watch = () => {
                     <CommentsContainer />
                 </div>
             </div>
-            <div className='mx-2 px-5 flex border border-red-100 w-full' >
-                Suggested videos
+            <div className=' mx-2 border border-red-500 flex flex-col w-full h-[720px]  rounded-lg' >
+                <LiveChat />
             </div>
         </div>
         
