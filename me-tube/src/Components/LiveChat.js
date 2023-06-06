@@ -15,7 +15,6 @@ const LiveChat = () => {
 
             const messageApi=await fetch("https://baconipsum.com/api/?type=all-meat&sentences=1")
             const messageJson=await messageApi.json()
-            console.log(messageJson[0])
             dispatch(addMessage({
                 profile:userJson.results[0].picture.medium,
                 name:userJson.results[0].name.first,
